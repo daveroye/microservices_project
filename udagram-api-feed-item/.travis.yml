@@ -1,0 +1,33 @@
+language: node_js
+node_js:
+  - 13
+
+services:
+  - docker
+
+# Pre-testing installs
+install:
+  - echo "nothing needs to be installed"
+
+# Scripts to be run such as tests
+before_script:
+  - echo "no tests"
+
+script:
+  - docker --version # print the version for logging
+  - docker build -t feed-item \
+                 --build_arg POSTGRES_DB="$POSTGRES_DB" \
+                 --build_arg POSTGRES_USERNAME="$POSTGRES_USERNAME" \
+                 --build_arg POSTGRES_PASSWORD="$POSTGRES_PASSWORD" \
+                 --build_arg POSTGRES_HOST="$POSTGRES_HOST" \
+                 --build_arg AWS_BUCKET="$AWS_BUCKET" \
+                 --build_arg AWS_REGION="$AWS_REGION" \
+                 --build_arg AWS_PROFILE="$AWS_PROFILE" \
+                 --build_arg JWT_SECRET="$JWT_SECRET" \
+                 --build_arg URL="$URL" \
+                 .
+  - docker tag feed-item "$DOCKER_USERNAME"/feed-item:latest
+
+after_success:
+  - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
+  - docker push "$DOCKER_USERNAME"/feed-item
