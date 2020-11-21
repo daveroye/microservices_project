@@ -68,7 +68,7 @@ spec:
               key: POSTGRES_HOST
         livenessProbe:
           httpGet:
-            path: /health
+            path: /api/v0/feed
             port: 8080
           initialDelaySeconds: 3
           periodSeconds: 3

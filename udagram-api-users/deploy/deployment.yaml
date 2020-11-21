@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: feed-item
+  name: users
   labels:
-    app: feed-item
+    app: users
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: feed-item
+      app: users
   template:
     metadata:
       labels:
-        app: feed-item
+        app: users
     spec:
       containers:
-      - name: feed-item
-        image: daveroye/feed-item
+      - name: users
+        image: daveroye/users
         imagePullPolicy: "Always"
         ports:
         - containerPort: 8080
@@ -68,7 +68,7 @@ spec:
               key: POSTGRES_HOST
         livenessProbe:
           httpGet:
-            path: /health
+            path: /api/v0/users/auth
             port: 8080
           initialDelaySeconds: 3
           periodSeconds: 3
