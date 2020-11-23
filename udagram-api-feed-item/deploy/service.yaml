@@ -3,17 +3,11 @@ kind: Service
 metadata:
   name: feed-item-svc
   labels:
-    app: feed-item  
-  namespace: default
-  selfLink: /api/v1/namespaces/default/services/feed-item-svc
+    service: feed-item  
 spec:
   ports:
-  - port: 8080
-    protocol: TCP
+  - name: "8080"
+    port: 8080
     targetPort: 8080
   selector:
-    app: feed-item
-  sessionAffinity: None
-  type: ClusterIP
-status:
-  loadBalancer: {}
+    service: feed-item
