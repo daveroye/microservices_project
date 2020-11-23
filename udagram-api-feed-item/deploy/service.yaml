@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: feed-item-svc
+  name: feed-item
   labels:
     service: feed-item  
 spec:
