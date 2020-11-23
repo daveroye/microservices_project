@@ -3,16 +3,13 @@ kind: Deployment
 metadata:
   name: feed-item
   labels:
-    app: feed-item
+    service: feed-item
 spec:
   replicas: 1
-  selector:
-    matchLabels:
-      app: feed-item
   template:
     metadata:
       labels:
-        app: feed-item
+        service: feed-item
     spec:
       containers:
       - name: feed-item

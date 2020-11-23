@@ -3,16 +3,13 @@ kind: Deployment
 metadata:
   name: users
   labels:
-    app: users
+    service: users
 spec:
   replicas: 1
-  selector:
-    matchLabels:
-      app: users
   template:
     metadata:
       labels:
-        app: users
+        service: users
     spec:
       containers:
       - name: users
