@@ -3,11 +3,11 @@ kind: Service
 metadata:
   name: feed-item
   labels:
-    service: feed-item  
+    app: feed-item  
 spec:
   ports:
   - name: "8080"
     port: 8080
     targetPort: 8080
   selector:
-    service: feed-item
+    app: feed-item
